@@ -25,29 +25,29 @@ const farmSchema = new mongoose.Schema({
 const Product = mongoose.model('Product', productSchema);
 const Farm = mongoose.model('Farm', farmSchema);
 
-// Product.insertMany([
-//     { name: 'Grapefruit', price: 1.99, season: 'Summer' },
-//     { name: 'Lemon', price: 0.99, season: 'Winter' },
-//     { name: 'Apple', price: 1.49, season: 'Fall' },
-//     { name: 'Orange', price: 1.29, season: 'Spring' }
-// ]).then(data => {
-//     console.log(data);
-// }).catch(err => {
-//     console.log(err);
-// });
+Product.insertMany([
+    { name: 'Grapefruit', price: 1.99, season: 'Summer' },
+    { name: 'Lemon', price: 0.99, season: 'Winter' },
+    { name: 'Apple', price: 1.49, season: 'Fall' },
+    { name: 'Orange', price: 1.29, season: 'Spring' }
+]).then(data => {
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+});
 
-// const makeFarm = async () => {
-//     const farm = new Farm({
-//         name: 'Full Belly Farms',
-//         city: 'Guinda, CA' 
-//     });
-//     const apple = await Product.findOne({ name: 'Apple' });
-//     farm.products.push(apple);
-//     const result = await farm.save();
-//     console.log(result);
-// }
+const makeFarm = async () => {
+    const farm = new Farm({
+        name: 'Full Belly Farms',
+        city: 'Guinda, CA' 
+    });
+    const apple = await Product.findOne({ name: 'Apple' });
+    farm.products.push(apple);
+    const result = await farm.save();
+    console.log(result);
+}
 
-// makeFarm();
+makeFarm();
 
 const addProduct = async () => {
     const farm = await Farm.findOne({ name: 'Full Belly Farms' });
@@ -58,3 +58,9 @@ const addProduct = async () => {
 }
 
 addProduct();
+
+Farm.findOne({ name: 'Full Belly Farms' })
+    .populate('products')
+    .then((farm) => {
+        console.log(farm);
+    })

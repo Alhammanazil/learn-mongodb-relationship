@@ -15,31 +15,32 @@ const productSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', productSchema);
+const Address = mongoose.model('Address', productSchema);
 
-// const makeUser = async () => {
-//     const user = new User({
-//         name: 'Peter Parker',
-//     })
-//     user.addresses.push({
-//         street: 'Queens',
-//         city: 'New York',
-//         country: 'USA'
-//     })
-//     const result = await user.save();
-//     console.log(user);
-// }
+const makeUser = async () => {
+    const user = new User({
+        name: 'Peter Parker',
+    })
+    user.addresses.push({
+        street: 'Queens',
+        city: 'New York',
+        country: 'USA'
+    })
+    const result = await user.save();
+    console.log(user);
+}
 
-// makeUser();
+makeUser();
 
-// const addAddress = async (id) => {
-//     const user = await User.findById(id);
-//     user.addresses.push({
-//         street: 'Brooklyn',
-//         city: 'New York',
-//         country: 'USA'
-//     })
-//     const result = await user.save();
-//     console.log(result);
-// }
+const addAddress = async (id) => {
+    const user = await User.findById(id);
+    user.addresses.push({
+        street: 'Brooklyn',
+        city: 'New York',
+        country: 'USA'
+    })
+    const result = await user.save();
+    console.log(result);
+}
 
-// addAddress('65c67a5188a96ce4f7a4d484');
+addAddress('65c67a5188a96ce4f7a4d484');
